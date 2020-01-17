@@ -1,5 +1,11 @@
 server:
   port:
     8087
-  servlet:
-    path: /
+
+github:
+  client:
+    id: e716c170ee24f4a0c8d4
+    secret: e7b3a0e721ad3f26fdac26f409745c4e5b3aa9b9
+
+  redirect:
+    uri: http://localhost:8087/callback
