@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/community.css"/>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
@@ -30,9 +31,6 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right" th:switch="${session.user == null}">
-                <li th:if="${session.user!=null}">
-                    <a href="/publish">发布</a>
-                </li>
                 <li th:case="true"><a href="https://github.com/login/oauth/authorize?client_id=e716c170ee24f4a0c8d4&redirect_uri=http://localhost:8087/callback&scope=user&state=1">登录</a></li>
                 <li class="dropdown" th:case="false">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"> <span class="caret"></span></a>
@@ -47,5 +45,37 @@
         </div>
     </div>
 </nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
+            <hr>
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题（简单扼要）:</label>
+                    <input type="text" class="form-control" id="title" th:value="${title}" name="title" placeholder="问题标题...">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题补充（必填，请遵循提示要求）:</label>
+                    <textarea name="description" id="description" class="form-control" th:text="${description}" rows="10" cols="30"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tag">添加标签:</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签，以逗号隔开，每个标签不超过10个字">
+                </div>
+                <div class="alert alert-danger" role="alert" th:text="${error}"></div>
+                <button type="submit" class="btn btn-success publish-btn">发布</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h2>问题发起指南</h2><br>
+            *问题标题<br>
+            *问题描述<br>
+            *添加标签<br>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
